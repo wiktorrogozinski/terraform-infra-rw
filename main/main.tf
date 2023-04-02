@@ -39,3 +39,18 @@ module "azure-container-registry" {
 
   depends_on = [module.resource_group]
 }
+
+module "azure-container-instance" {
+  source = "../modules/azure-container-instances"
+
+  name                = var.aci_config.aci_name
+  resource_group_name = module.resource_group.resource_group_name
+  location            = module.resource_group.location
+  os_type             = var.aci_config.os_type
+  ip_address_type     = var.aci_config.ip_address.type
+  dns_name_label      = var.aci_config.ip_address.dns_name_label
+  image               = var.aci_config.image
+  port                = var.aci_config.ports[0].port
+  protocol            = var.aci_config.ports[0].protocol
+
+}
