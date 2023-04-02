@@ -13,4 +13,8 @@ variable "env" {
   type        = string
 }
 
+variable "acr_config" {
+  description = "The config options."
+  type        = map(any)
+}
 
