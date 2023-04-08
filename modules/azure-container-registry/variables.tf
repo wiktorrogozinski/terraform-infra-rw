@@ -20,3 +20,9 @@ variable "resource_group_name" {
 
 }
 
+variable "admin_enabled" {
+  description = "The switch to admin user creation"
+  type        = string
+  default     = false
+}
+

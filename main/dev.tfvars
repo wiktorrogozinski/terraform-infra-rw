@@ -1,18 +1,19 @@
 resource_group_name = "app-implementation"
-location            = "germanywestcentral"
+location            = "West Europe"
 env                 = "dev"
 
 acr_config = {
-  acr_name = "testappacr"
+  acr_name      = "centralacr"
+  admin_enabled = true
 }
 
 aci_config = {
-  aci_name       = "testappaci"
+  aci_name       = "testappacirwtest"
   os_type        = "Linux"
-  dns_name_label = "testapp-container-group"
+  dns_name_label = "testapp-aci"
   ip_address = {
     type           = "Public"
-    dns_name_label = "testapp-container-group"
+    dns_name_label = "testapp-aci"
   }
   image = "mcr.microsoft.com/azuredocs/aci-helloworld:latest"
   ports = [{

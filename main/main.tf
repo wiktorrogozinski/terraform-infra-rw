@@ -1,9 +1,9 @@
 terraform {
 
   backend "azurerm" {
-    subscription_id      = "38207137-94d1-401e-932e-a4f45f771f1c"
-    resource_group_name  = "wiktor-terra-playground"
-    storage_account_name = "terraformstatestoragerw"
+    subscription_id      = "2966aa08-f4fd-4f40-bc15-79385c427fa0"
+    resource_group_name  = "terraform-staterg"
+    storage_account_name = "tfstatestoragerw"
     container_name       = "states"
     key                  = "testapp/dev/dev.tfstate"
   }
@@ -36,6 +36,7 @@ module "azure-container-registry" {
   acr_name            = "${var.acr_config.acr_name}${var.env}"
   resource_group_name = module.resource_group.resource_group_name
   location            = module.resource_group.location
+  admin_enabled       = var.acr_config.admin_enabled
 
   depends_on = [module.resource_group]
 }
@@ -52,5 +53,4 @@ module "azure-container-instance" {
   image               = var.aci_config.image
   port                = var.aci_config.ports[0].port
   protocol            = var.aci_config.ports[0].protocol
-
 }
