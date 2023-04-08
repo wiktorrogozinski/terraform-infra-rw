@@ -41,16 +41,15 @@ module "azure-container-registry" {
   depends_on = [module.resource_group]
 }
 
-module "azure-container-instance" {
-  source = "../modules/azure-container-instances"
+module "app-service" {
+  source = "../modules/azure-app-service"
 
-  name                = var.aci_config.aci_name
-  resource_group_name = module.resource_group.resource_group_name
+  as_name             = "${var.as_config.name}${var.env}"
+  asp_name            = "${var.asp_config.name}${var.env}"
   location            = module.resource_group.location
-  os_type             = var.aci_config.os_type
-  ip_address_type     = var.aci_config.ip_address.type
-  dns_name_label      = var.aci_config.ip_address.dns_name_label
-  image               = var.aci_config.image
-  port                = var.aci_config.ports[0].port
-  protocol            = var.aci_config.ports[0].protocol
+  resource_group_name = module.resource_group.resource_group_name
+  service_plan_id     = module.app-service.service_plan_id
+  sku_name            = var.asp_config.sku_name
+  os_type             = var.asp_config.os_type
+
 }

@@ -1,4 +1,4 @@
 # The test app implementation - Terraform Infra
--DEV: 001\
+-DEV: 008\
 -BF: 000\
 -PROD: 000

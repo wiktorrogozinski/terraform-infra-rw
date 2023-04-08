@@ -7,18 +7,12 @@ acr_config = {
   admin_enabled = true
 }
 
-aci_config = {
-  aci_name       = "testappacirwtest"
-  os_type        = "Linux"
-  dns_name_label = "testapp-aci"
-  ip_address = {
-    type           = "Public"
-    dns_name_label = "testapp-aci"
-  }
-  image = "mcr.microsoft.com/azuredocs/aci-helloworld:latest"
-  ports = [{
-    port     = 80
-    protocol = "TCP"
-  }]
+as_config = {
+  name = "testapprw"
+}
 
+asp_config = {
+  name     = "asp-common-"
+  os_type  = "Linux"
+  sku_name = "B1"
 }
