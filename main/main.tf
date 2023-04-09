@@ -41,6 +41,15 @@ module "azure-container-registry" {
   depends_on = [module.resource_group]
 }
 
+module "user-assigned-identity" {
+  source = "../modules/azure-user-assigned-identity"
+
+  identity_name       = "${var.identity_name}-${var.env}"
+  location            = module.resource_group.location
+  resource_group_name = module.resource_group.resource_group_name
+
+}
+
 module "app-service" {
   source = "../modules/azure-app-service"
 
@@ -51,5 +60,17 @@ module "app-service" {
   service_plan_id     = module.app-service.service_plan_id
   sku_name            = var.asp_config.sku_name
   os_type             = var.asp_config.os_type
+  identity_ids        = [module.user-assigned-identity.identity_id]
+}
 
+module "key-vault" {
+  source = "../modules/azure-key-vault"
+
+  key_vault_name      = "${var.kv_config.key_vault_name}-${var.env}"
+  key_vault_location  = module.resource_group.location
+  resource_group_name = module.resource_group.resource_group_name
+  tenant_id           = var.tenant_id
+  sku_name            = var.kv_config.sku_name
+  object_id           = module.user-assigned-identity.identity_client_id
+  secret_permissions  = ["Get", "Set", "List"]
 }

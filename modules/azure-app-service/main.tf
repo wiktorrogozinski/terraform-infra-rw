@@ -12,6 +12,17 @@ resource "azurerm_linux_web_app" "current" {
   resource_group_name = var.resource_group_name
   service_plan_id     = var.service_plan_id
 
-  site_config {}
-
+  identity {
+    type         = "UserAssigned"
+    identity_ids = var.identity_ids
+  }
+  site_config {
+    application_stack {
+      docker_image     = "centralacrdev.azurecr.io/apka"
+      docker_image_tag = "8"
+    }
+  }
 }
+
+
+

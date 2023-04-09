@@ -28,3 +28,9 @@ variable "service_plan_id" {
   description = "The ID of the App Service Plan."
 }
 
+variable "identity_ids" {
+  description = "The list of identity ids."
+  type        = list(string)
+
+}
+

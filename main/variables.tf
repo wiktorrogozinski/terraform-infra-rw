@@ -27,3 +27,26 @@ variable "asp_config" {
   description = "The config options."
   type        = map(any)
 }
+
+variable "kv_config" {
+  description = "Configuration for the Key Vault."
+  type = object({
+    key_vault_name     = string
+    sku_name           = string
+    secret_permissions = list(string)
+  })
+}
+
+
+
+variable "tenant_id" {
+  description = "The tenant id."
+  type        = string
+
+}
+
+variable "identity_name" {
+  description = "The name of identity."
+  type        = string
+
+}
