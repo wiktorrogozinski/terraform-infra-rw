@@ -26,3 +26,8 @@ variable "admin_enabled" {
   default     = false
 }
 
+variable "key_vault_id" {
+  description = "The id of key vault."
+}
+
+

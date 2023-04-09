@@ -21,9 +21,30 @@ asp_config = {
 identity_name = "uai-app-implementation"
 
 kv_config = {
-  key_vault_name     = "kv-appimplementation"
-  sku_name           = "standard"
-  secret_permissions = ["Get", "Set", "List"]
+  key_vault_name = "kv-appimplementation"
+  sku_name       = "standard"
+
+  access_policies = {
+    terrraform-service-principal-rw = {
+      objectID = "77838574-0899-45b4-beb0-e04bddaa9b7b"
+      permissions = {
+        secret_permissions      = ["List", "Get", "Backup", "Delete", "Purge", "Recover", "Restore", "Set"]
+        certificate_permissions = ["List", "Update", "Create", "Delete", "Purge", "Recover"]
+        key_permissions         = ["List", "Update", "Create", "Delete", "Purge", "Recover"]
+      }
+    }
+
+    uai-app-implementation-dev = {
+      objectID = "429d588f-2b77-4cbf-952a-a258ab1e6f33"
+      permissions = {
+        secret_permissions      = ["List", "Get", "Backup", "Delete", "Purge", "Recover", "Restore", "Set"]
+        certificate_permissions = ["List", "Update", "Create", "Delete", "Purge", "Recover"]
+        key_permissions         = ["List", "Update", "Create", "Delete", "Purge", "Recover"]
+      }
+    }
+  }
+
+
 
 }
 

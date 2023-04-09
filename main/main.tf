@@ -37,6 +37,7 @@ module "azure-container-registry" {
   resource_group_name = module.resource_group.resource_group_name
   location            = module.resource_group.location
   admin_enabled       = var.acr_config.admin_enabled
+  key_vault_id        = module.key-vault.key_vault_id
 
   depends_on = [module.resource_group]
 }
@@ -71,6 +72,7 @@ module "key-vault" {
   resource_group_name = module.resource_group.resource_group_name
   tenant_id           = var.tenant_id
   sku_name            = var.kv_config.sku_name
-  object_id           = module.user-assigned-identity.identity_client_id
-  secret_permissions  = ["Get", "Set", "List"]
+  access_policies     = var.kv_config.access_policies
 }
+
+

@@ -6,9 +6,14 @@ resource "azurerm_key_vault" "current" {
   sku_name            = var.sku_name
 }
 
-resource "azurerm_key_vault_access_policy" "acr-credentials" {
-  key_vault_id       = azurerm_key_vault.current.id
-  tenant_id          = var.tenant_id
-  object_id          = var.object_id
-  secret_permissions = var.secret_permissions
-}
+resource "azurerm_key_vault_access_policy" "permissions" {
+  for_each = var.access_policies
+
+  key_vault_id = azurerm_key_vault.current.id
+  tenant_id    = var.tenant_id
+  object_id    = each.value["objectID"]
+
+  secret_permissions      = each.value["permissions"]["secret_permissions"]
+  certificate_permissions = each.value["permissions"]["certificate_permissions"]
+  key_permissions         = each.value["permissions"]["key_permissions"]
+} 

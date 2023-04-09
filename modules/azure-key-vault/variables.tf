@@ -19,12 +19,25 @@ variable "sku_name" {
   default     = "standard"
 }
 
-variable "object_id" {
-  description = "The object ID of the user or service principal that will have access to the Azure Key Vault."
-}
 
 variable "secret_permissions" {
   description = "A list of secret permissions for the user or service principal that will have access to the Azure Key Vault."
   type        = list(string)
   default     = []
+}
+
+variable "certificate_permissions" {
+  description = "A list of certificate permissions for the user or service principal that will have access to the Azure Key Vault."
+  type        = list(string)
+  default     = []
+}
+
+variable "key_permissions" {
+  description = "A list of key permissions for the user or service principal that will have access to the Azure Key Vault."
+  type        = list(string)
+  default     = []
+}
+
+variable "access_policies" {
+  description = "Map with objectIDs objects to add privileges to KeyVault."
 }
