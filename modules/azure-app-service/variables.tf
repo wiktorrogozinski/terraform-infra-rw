@@ -34,3 +34,8 @@ variable "identity_ids" {
 
 }
 
+variable "key_vault_reference_identity_id" {
+  description = "The id of user assigned identity."
+
+}
+

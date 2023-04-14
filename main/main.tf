@@ -19,6 +19,7 @@ terraform {
 
 provider "azurerm" {
   features {}
+  skip_provider_registration = true
 }
 
 
@@ -54,14 +55,15 @@ module "user-assigned-identity" {
 module "app-service" {
   source = "../modules/azure-app-service"
 
-  as_name             = "${var.as_config.name}${var.env}"
-  asp_name            = "${var.asp_config.name}${var.env}"
-  location            = module.resource_group.location
-  resource_group_name = module.resource_group.resource_group_name
-  service_plan_id     = module.app-service.service_plan_id
-  sku_name            = var.asp_config.sku_name
-  os_type             = var.asp_config.os_type
-  identity_ids        = [module.user-assigned-identity.identity_id]
+  as_name                         = "${var.as_config.name}${var.env}"
+  asp_name                        = "${var.asp_config.name}${var.env}"
+  location                        = module.resource_group.location
+  resource_group_name             = module.resource_group.resource_group_name
+  service_plan_id                 = module.app-service.service_plan_id
+  sku_name                        = var.asp_config.sku_name
+  os_type                         = var.asp_config.os_type
+  identity_ids                    = [module.user-assigned-identity.identity_id]
+  key_vault_reference_identity_id = module.user-assigned-identity.identity_id
 }
 
 module "key-vault" {

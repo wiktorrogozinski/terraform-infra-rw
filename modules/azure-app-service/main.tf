@@ -1,3 +1,4 @@
+
 resource "azurerm_service_plan" "current" {
   name                = var.asp_name
   location            = var.location
@@ -7,10 +8,11 @@ resource "azurerm_service_plan" "current" {
 }
 
 resource "azurerm_linux_web_app" "current" {
-  name                = var.as_name
-  location            = var.location
-  resource_group_name = var.resource_group_name
-  service_plan_id     = var.service_plan_id
+  name                            = var.as_name
+  location                        = var.location
+  resource_group_name             = var.resource_group_name
+  service_plan_id                 = var.service_plan_id
+  key_vault_reference_identity_id = var.key_vault_reference_identity_id
 
   identity {
     type         = "UserAssigned"
@@ -22,7 +24,10 @@ resource "azurerm_linux_web_app" "current" {
       docker_image_tag = "8"
     }
   }
+
 }
+
+
 
 
 
