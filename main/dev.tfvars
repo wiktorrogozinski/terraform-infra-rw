@@ -42,8 +42,15 @@ kv_config = {
         key_permissions         = ["List", "Update", "Create", "Delete", "Purge", "Recover"]
       }
     }
+    github-actions-dev = {
+      objectID = "fd839758-6160-492a-a97f-57a9b94932fa"
+      permissions = {
+      secret_permissions      = ["List", "Get", "Backup", "Delete", "Purge", "Recover", "Restore", "Set"]
+      certificate_permissions = ["List", "Update", "Create", "Delete", "Purge", "Recover"]
+      key_permissions         = ["List", "Update", "Create", "Delete", "Purge", "Recover"]
+    }
   }
-
+}
 
 
 }
